@@ -261,7 +261,7 @@ interface nn::audio::detail::IFinalOutputRecorder {
 	[3] AppendFinalOutputRecorderBuffer(u64, buffer<nn::audio::AudioInBuffer, 5>);
 	[4] RegisterBufferEvent() -> handle<copy>;
 	@version(1.0.0)
-	[5] GetReleasedFinalOutputRecorderBuffer() -> (u32, buffer<nn::audio::AudoInBuffer, 6>);
+	[5] GetReleasedFinalOutputRecorderBuffer() -> (u32, buffer<nn::audio::AudioInBuffer, 6>);
 	@version(2.0.0+)
 	[5] GetReleasedFinalOutputRecorderBuffer() -> (u32, u64, buffer<nn::audio::AudioInBuffer, 6>);
 	[6] ContainsFinalOutputRecorderBuffer(u64) -> b8;

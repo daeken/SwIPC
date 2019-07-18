@@ -164,3 +164,6 @@ def getAll():
 		with file(dir + 'ipcdefs/cache', 'w') as fp:
 			json.dump(res, fp)
 	return res
+
+if __name__=='__main__':
+    getAll()

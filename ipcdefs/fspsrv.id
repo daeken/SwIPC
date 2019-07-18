@@ -66,7 +66,7 @@ interface nn::fssrv::sf::IFileSystemProxy is fsp-srv {
 	# as "MountContent", but official nn\_sf\_sync symbols use "OpenXX" names.
 	# 
 	@version(2.0.0+)
-	[7] OpenFileSystemWithPatch(nn::fssrv::sf::FileSystemType filesystem_type, nn:ApplicationId id) -> object<nn::fssrv::sf::IFileSystem>;
+	[7] OpenFileSystemWithPatch(nn::fssrv::sf::FileSystemType filesystem_type, nn::ApplicationId id) -> object<nn::fssrv::sf::IFileSystem>;
 	# Takes a type-0x19 input buffer, an
 	# [\#FileSystemType](http://switchbrew.org/index.php?title=Filesystem%20services#FileSystemType "wikilink")
 	# and an u64 title-id. Returns an
@@ -119,7 +119,7 @@ interface nn::fssrv::sf::IFileSystemProxy is fsp-srv {
 	# exist, 0x320002 for partitions which cannot be opened and a valid
 	# [\#IStorage](#nn::fssrv::sf::IStorage "wikilink") handle otherwise.
 	# 
-	[12] OpenBisStorage(nn::fs::sf::Partition partitionId) -> object<nn::fssrv::sf::IStorage> bisPartition;
+	[12] OpenBisStorage(nn::fssrv::sf::Partition partitionId) -> object<nn::fssrv::sf::IStorage> bisPartition;
 	[13] InvalidateBisCache();
 	[17] OpenHostFileSystem(buffer<bytes<0x301>,0x19,0x301>) -> object<nn::fssrv::sf::IFileSystem>;
 	[18] OpenSdCardFileSystem() -> object<nn::fssrv::sf::IFileSystem>;
@@ -619,7 +619,7 @@ interface nn::fssrv::sf::IProgramRegistry is fsp-pr {
 
 // --------------------------------------------- FSP-LDR ---------------------------------------------
 interface nn::fssrv::sf::IFileSystemProxyForLoader is fsp-ldr {
-	[0] OpenCodeFileSystem(nn::Applicationid Tid, buffer<bytes<0x301>, 0x19, 0x301> content_path) -> object<nn::fssrv::sf::IFileSystem> content_fs;
+	[0] OpenCodeFileSystem(nn::ApplicationId Tid, buffer<bytes<0x301>, 0x19, 0x301> content_path) -> object<nn::fssrv::sf::IFileSystem> content_fs;
 	[1] IsArchivedProgram(u64) -> u8;
 	@version(4.0.0+)
 	[2] SetCurrentProcess(u64, pid);

@@ -1,5 +1,6 @@
 type nn::hid::PalmaConnectionHandle = u64;
 type nn::hid::PalmaFeature = u64;
+type nn::hid::PalmaApplicationSectionAccessBuffer = u8;
 type nn::hid::VibrationGcErmCommand = u64;
 
 interface nn::hid::IHidServer is hid {
