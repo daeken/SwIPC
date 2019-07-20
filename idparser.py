@@ -154,8 +154,8 @@ def parse(data):
 	return types, ifaces, services
 
 def getAll():
-	dir = os.path.dirname(os.path.realpath(__file__)) + '/'
-	fns = [dir + 'ipcdefs/auto.id', dir + 'ipcdefs/switchbrew.id'] + [x for x in glob.glob(dir + 'ipcdefs/*.id') if x != dir + 'ipcdefs/auto.id' and x != dir + 'ipcdefs/switchbrew.id']
+	dir = os.path.dirname(os.path.realpath(__file__)).replace('\\', '/') + '/'
+	fns = [dir + 'ipcdefs/auto.id', dir + 'ipcdefs/switchbrew.id'] + [x for x in [x.replace('\\', '/') for x in glob.glob(dir + 'ipcdefs/*.id')] if x != dir + 'ipcdefs/auto.id' and x != dir + 'ipcdefs/switchbrew.id']
 
 	if os.path.exists(dir + 'ipcdefs/cache') and all(os.path.getmtime(dir + 'ipcdefs/cache') > os.path.getmtime(x) for x in fns):
 		res = json.load(file(dir + 'ipcdefs/cache'))
