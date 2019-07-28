@@ -1,0 +1,40 @@
+interface nns::hosbinder::IHOSBinderDriver is dispdrv {
+	# Takes a s32 (**ID**), an u32 (**code**), a type-0x5 input buffer
+	# (**parcel\_data**), a type-0x6 output buffer (**parcel\_reply**) and an
+	# input u32 (**flags**). Each word is placed immediately after the
+	# previous word.
+	# 
+	# Analogous to "onTransact" from "android.os.IServiceManager".
+	# 
+	[0] TransactParcel(i32 id, u32 code, buffer<bytes, 5> parcel_data, u32 flags) -> (buffer<bytes, 6> parcel_reply);
+	
+	# Takes 3 input s32s: **ID**, **addval**, and **type**. Each word
+	# immediately follows the previous word. No additional output.
+	# 
+	# | Called by official function          | addval | type |
+	# | ------------------------------------ | ------ | ---- |
+	# | "android::BpBinder::onFirstRef"      | 1      | 1    |
+	# | "android::BpBinder::onLastStrongRef" | \-1    | 1    |
+	# | ?                                    | 1      | 0    |
+	# | ?                                    | \-1    | 0    |
+	# 
+	# During init, {addval=1, type=0} is used then {addval=1, type=1} is used.
+	# 
+	[1] AdjustRefcount(i32 id, i32 addVal, i32 type);
+	
+	# Takes an input s32 (**ID**) and u32, with the latter immediately
+	# following the previous word. Returns an output event handle.
+	# 
+	[2] GetNativeHandle(i32 id, u32) -> handle<copy, event>;
+	
+	# Takes a s32 (**ID**), an u32 (**code**), a type-0x21 input buffer
+	# (**parcel\_data**), a type-0x22 output buffer (**parcel\_reply**) and an
+	# input u32 (**flags**). Each word is placed immediately after the
+	# previous
+	# word.
+	# 
+	# [Category:Services](http://switchbrew.org/index.php?title=Category:Services "wikilink")
+	# 
+	@version(3.0.0+)
+	[3] TransactParcelAuto(i32 id, u32 code, buffer<bytes, 0x21> parcel_data, u32 flags) -> (buffer<bytes, 0x22> parcel_reply);
+}
