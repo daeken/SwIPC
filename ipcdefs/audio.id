@@ -203,7 +203,7 @@ interface nn::audio::detail::IAudioRenderer {
 	[11] ExecuteAudioRendererRendering();
 }
 
-interface nn::audio::detail::IAudioRendererManager is audrec:u {
+interface nn::audio::detail::IAudioRendererManager is audren:u {
 	[0] OpenAudioRenderer(nn::audio::detail::AudioRendererParameterInternal, u64, nn::applet::AppletResourceUserId, pid, handle<copy>, handle<copy>) -> object<nn::audio::detail::IAudioRenderer>;
 	[1] GetWorkBufferSize(nn::audio::detail::AudioRendererParameterInternal) -> u64;
 	[2] GetAudioDeviceService(nn::applet::AppletResourceUserId) -> object<nn::audio::detail::IAudioDevice>;
@@ -273,7 +273,7 @@ interface nn::audio::detail::IFinalOutputRecorder {
 	[9] GetReleasedFinalOutputRecorderBufferAuto() -> (u32, u64, buffer<nn::audio::AudioInBuffer, 0x22>);
 }
 
-interface nn::audio::detail::IFinalOutputRecorderManager is audren:u {
+interface nn::audio::detail::IFinalOutputRecorderManager is audrec:u {
 	@version(1.0.0-2.0.0)
 	[0] OpenFinalOutputRecorder(u64, u64, handle<copy>) -> (bytes<0x10, 4>, object<nn::audio::detail::IFinalOutputRecorder>);
 	@version(3.0.0+)
