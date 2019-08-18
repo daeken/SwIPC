@@ -67,18 +67,24 @@ interface nn::audio::detail::IAudioDebugManager {
 }
 
 interface nn::audio::detail::IAudioDevice {
-	[0] Unknown0() -> (u32, buffer<bytes, 6>);
-	[1] Unknown1(u32, buffer<bytes, 5>);
-	[2] Unknown2(buffer<bytes, 5>) -> u32;
-	[3] Unknown3() -> buffer<bytes, 6>;
-	[4] Unknown4() -> handle<copy, event>;
-	[5] Unknown5() -> u32;
-	[6] Unknown6() -> (u32, buffer<bytes, 0x22>);
-	[7] Unknown7(u32, buffer<bytes, 0x21>);
-	[8] Unknown8(buffer<bytes, 0x21>) -> u32;
-	[10] Unknown10() -> buffer<bytes, 0x22>;
-	[11] Unknown11() -> handle<copy, event>;
-	[12] Unknown12() -> handle<copy, event>;
+	[0] ListAudioDeviceName() -> (u32, buffer<unknown,6>);
+	[1] SetAudioDeviceOutputVolume(u32, buffer<unknown,5>);
+	[2] GetAudioDeviceOutputVolume(buffer<unknown,5>) -> u32;
+	[3] GetActiveAudioDeviceName() -> buffer<unknown,6>;
+	[4] QueryAudioDeviceSystemEvent() -> handle<copy>;
+	[5] GetActiveChannelCount() -> u32;
+	@version(3.0.0+)
+	[6] ListAudioDeviceNameAuto() -> (u32, buffer<unknown,0x22>);
+	@version(3.0.0+)
+	[7] SetAudioDeviceOutputVolumeAuto(u32, buffer<unknown,0x21>);
+	@version(3.0.0+)
+	[8] GetAudioDeviceOutputVolumeAuto(buffer<unknown,0x21>) -> f32;
+	@version(3.0.0+)
+	[10] GetActiveAudioDeviceNameAuto() -> buffer<unknown,0x22>;
+	@version(3.0.0+)
+	[11] QueryAudioDeviceInputEvent() -> handle<copy>;
+	@version(3.0.0+)
+	[12] QueryAudioDeviceOutputEvent() -> handle<copy>;
 }
 
 interface nn::audio::detail::IAudioIn {
